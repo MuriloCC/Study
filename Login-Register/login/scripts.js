@@ -1,12 +1,50 @@
-const login = document.querySelector('#login-button').addEventListener('click', verify)
+const users = [
+    {
+        email: 'muras@gmail.com',
+        password: 'muras123'
+    },
+    {
+        email: 'pino@gmail.com',
+        password: 'pino123'
+    }
+]
 
-function verify(){
-    let email = document.querySelector('#email')
-    let pass = document.querySelector('#pass')
+console.log(users)
 
-    if(email.value == Data.email && pass.value == Data.password){
-        alert('email e senha corretos!')
-    }else{
-        alert('email e/ou senha pode estar errado')
-    }       
+const Login = {
+    email: document.querySelector('input#email'),
+    password: document.querySelector('input#pass'),
+
+    getValues(){
+        return{
+            email: Login.email.value,
+            password: Login.password.value
+        }
+    },
+
+    check(){
+        const { email, password } = Login.getValues()
+
+        if(email == '' || password == ''){
+            throw new Error ('Favor preencher todos os campos')
+        }
+    },
+
+    submit(event){
+        event.preventDefault()
+
+        try{
+            let user = Login.getValues()
+            Login.check()
+            users.forEach(userData => {
+                if(user.email !== userData.email || user.password !== userData.password){
+                    throw new Error('senha ou email invalidos')
+                }
+                return alert('Logado na secreta')
+            })
+
+        }catch(error){
+
+        }
+    }
 }

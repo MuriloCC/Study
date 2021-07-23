@@ -47,7 +47,7 @@ const signUpForm = {
         event.preventDefault()
         try{
             let user = signUpForm.getValues()
-            signUpForm.verify(user)
+            signUpForm.verify()
             Data.all.forEach((userData) => {
                 if(user.email == userData.email){
                     throw new Error('este email já existe')
